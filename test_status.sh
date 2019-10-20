@@ -8,7 +8,7 @@ fi
 status=$(systemctl status $1 | grep Active | awk '{print $2}')
 inactive='inactive'
 
-if [$status == $inactive]; then
+if [ $status == $inactive ]; then
  echo "noooo it is off"
 else
  echo "My status is $status"
