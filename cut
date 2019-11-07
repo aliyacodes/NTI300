@@ -1,0 +1,31 @@
+[root@xxx aasken01]# cat cartoons
+South Park|Comedy Central|1997
+Family Guy|Fox|1998
+Bob's Burgers|Fox|2011
+Rick and Morty|Adult Swim|2013
+American Dad|Fox|2005
+[root@xxx aasken01]# cut -f3 -d\| cartoons
+1997
+1998
+2011
+2013
+2005
+[root@xxx aasken01]# who
+aasken01 pts/0        2019-10-31 18:05 (0.0.0.0)
+[root@xxx aasken01]# who | cut -d' ' -f1
+aasken01
+[root@xxx ~]# mail $(who | cut -d' ' -f1)
+Subject: testing
+Dear Me,
+Here's some mail.
+Love,
+Me
+EOT
+[root@xxx ~]# 
+[aasken01@xxx ~]$ mail $(who | cut -d' ' -f1)
+Subject: test subject
+test content
+EOT
+[aasken01@xxx ~]$ ls
+cartoons
+You have new mail in /var/spool/mail/aasken01
