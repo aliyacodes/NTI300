@@ -89,7 +89,7 @@ def create_instance(compute, project, zone, name):
 
 
 	return compute.instances().insert(
-		project=prooject,
+		project=project,
 		zone=zone,
 		body=config).execute()
 
