@@ -15,7 +15,7 @@ compute = discovery.build('compute', 'v1', credentials=credentials)
 
 project = 'gothic-calling-254202'
 zone = 'us-central1-a'
-name = 'x'
+name = 'aaa'
 
 def list_instances(compute, project, zone):
 	result = compute.instances().list(project=project, zone=zone).execute()
