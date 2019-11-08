@@ -15,19 +15,19 @@ compute = discovery.build('compute', 'v1', credentials=credentials)
 
 project = 'gothic-calling-254202'
 zone = 'us-central1-a'
-name = 'x'
+name = 'aaa'
 
 def list_instances(compute, project, zone):
 	result = compute.instances().list(project=project, zone=zone).execute()
 	return result['items']
 
 def create_instance(compute, project, zone, name):
-	startup_script = open('startup-sript.sh', 'r').read()
+	startup_script = open('startup-script.sh', 'r').read()
 	image_response = compute.images().getFromFamily(
-		project='centos-cloud', family='centos-7').execute()
+	  project='centos-cloud', family='centos-7').execute()
 
 	source_disk_image = image_response['selfLink']
-	machine_type = "zone/%s/machineTypes/f1-micro" % zone
+	machine_type = "zones/%s/machineTypes/f1-micro" % zone
 
 	config = {
 		'name': name,
@@ -89,7 +89,7 @@ def create_instance(compute, project, zone, name):
 
 
 	return compute.instances().insert(
-		project=prooject,
+		project=project,
 		zone=zone,
 		body=config).execute()
 
