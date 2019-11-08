@@ -9,7 +9,7 @@ def setup_install():
     print('installing pip and virtualenv so we can give django its own version of python')
     os.system('yum -y install python-pip && pip install --upgrade pip')
     os.system('pip install virtualenv')
-    os.chdir('./opt')
+    os.chdir('/opt')
     os.mkdir('/opt/django')
     os.chdir('/opt/django')
     os.system('virtualenv django-env')
