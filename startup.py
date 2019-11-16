@@ -5,6 +5,19 @@ import re
 import subprocess
 
 
+def local_repo():
+    repo="""[local-epel]
+name=NTI300 EPEL
+baseurl=http://35.222.109.172/epel/
+gpgcheck=0
+enabled=1"""
+    os.system('for file in $( ls /etc/yum.repos.d/ ); do mv /etc/yum.repos.d/$file /etc/yum.repos.d/$file.bak; done')
+    print(repo)
+    with open("/etc/yum.repos.d/local-repo.repo","w+") as f:
+      f.write(repo)
+    f.close()
+
+
 def setup_install():
     print('installing pip and virtualenv so we can give django its own version of python')
     os.system('yum -y install python-pip && pip install --upgrade pip')
@@ -13,7 +26,6 @@ def setup_install():
     os.mkdir('/opt/django')
     os.chdir('/opt/django')
     os.system('virtualenv django-env')
-    os.system('chown -R aasken01 /opt/django')  # We're using shell, because the python built-in chown doesn't work as well
 
 
 def django_install():
@@ -32,7 +44,7 @@ def django_install():
 
 def django_start():
     print('starting django')
-    os.system('chown -R aasken01 /opt/django')
+    os.system('chown -R django /opt/django')
     os.chdir('/opt/django/project1')
     os.system('source /opt/django/django-env/bin/activate ' + \
               '&& python manage.py migrate')
@@ -54,6 +66,7 @@ def django_start():
 
     os.system('sudo -u django sh -c "source /opt/django/django-env/bin/activate && python manage.py runserver 0.0.0.0:8000&"')
 
+local_repo()
 setup_install()
 django_install()
 django_start()
